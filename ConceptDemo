@@ -1,0 +1,55 @@
+// ConceptDemo.java
+// Halah Hameed
+// October 26, 2025
+// Demonstrates Adapter Pattern, Generics, and Java Collections concepts
+
+import java.util.*;
+
+// Main class
+public class ConceptDemo {
+
+    // --- Adapter Pattern ---
+    // This method adapts an Integer array into a List<Integer>
+    public static List<Integer> arrayToList(Integer[] array) {
+        // Using Arrays.asList() to create a list view of the array
+        return new ArrayList<>(Arrays.asList(array));
+    }
+
+    // --- Unbounded Wildcard Method ---
+    // This method can print lists of any type
+    public static void printList(List<?> list) {
+        System.out.println("Printing list using unbounded wildcard: " + list);
+    }
+
+    // --- Main Method ---
+    public static void main(String[] args) {
+
+        // Step 1: Create Integer array (our target for Adapter Pattern)
+        Integer[] numberArray = {5, 2, 9, 1, 4, 7};
+
+        // Step 2: Use adapter to convert array into List<Integer>
+        List<Integer> numberList = arrayToList(numberArray);
+
+        // Step 3: Use Diamond Operator to create another ArrayList
+        List<Integer> extraNumbers = new ArrayList<>();
+        // Add elements using Collections.addAll()
+        Collections.addAll(extraNumbers, 10, 3, 8);
+
+        // Combine both lists
+        numberList.addAll(extraNumbers);
+
+        // Step 4: Print list before sorting
+        System.out.println("Before sorting: " + numberList);
+
+        // Step 5: Sort the list
+        Collections.sort(numberList);
+        System.out.println("After sorting: " + numberList);
+
+        // Step 6: Remove a specific element (4) by value
+        numberList.remove(Integer.valueOf(4));
+        System.out.println("After removing 4: " + numberList);
+
+        // Step 7: Print list using unbounded wildcard
+        printList(numberList);
+    }
+}
